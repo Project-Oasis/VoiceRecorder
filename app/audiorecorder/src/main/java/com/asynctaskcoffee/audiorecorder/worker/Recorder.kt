@@ -42,7 +42,6 @@ class Recorder(audioRecordListener: AudioRecordListener?, private var context: C
             fileName
         }
         recorder?.setOutputFile(localPath)
-        recorder?.setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
         try {
             recorder?.prepare()
         } catch (e: java.lang.Exception) {
