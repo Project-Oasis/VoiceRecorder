@@ -28,7 +28,7 @@ class Recorder(audioRecordListener: AudioRecordListener?, private var context: C
         }
         recorder = MediaRecorder()
         recorder?.setAudioSource(MediaRecorder.AudioSource.DEFAULT)
-        recorder?.setOutputFormat(AudioFormat.ENCODING_PCM_16BIT)
+        recorder?.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
         recorder?.setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
         recorder?.setAudioChannels(2)
         recorder?.setAudioSamplingRate(44100)
