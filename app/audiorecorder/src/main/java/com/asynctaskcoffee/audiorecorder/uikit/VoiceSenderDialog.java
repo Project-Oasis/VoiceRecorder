@@ -2,6 +2,7 @@ package com.asynctaskcoffee.audiorecorder.uikit;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
@@ -59,6 +60,8 @@ public class VoiceSenderDialog extends BottomSheetDialogFragment implements View
     private Recorder recorder;
     private Player player;
 
+    private Runnable doOnDismiss;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,6 +104,10 @@ public class VoiceSenderDialog extends BottomSheetDialogFragment implements View
 
     public void setFilePath(String fileURI) {
         this.filePath = fileURI;
+    }
+
+    public void setDoOnDismiss(Runnable doOnDismiss) {
+        this.doOnDismiss = doOnDismiss;
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -147,6 +154,12 @@ public class VoiceSenderDialog extends BottomSheetDialogFragment implements View
             }
         } else if (closeRecordPanel.getId() == v.getId())
             dismiss();
+    }
+
+    @Override
+    public void onDismiss(@NonNull DialogInterface dialog) {
+        super.onDismiss(dialog);
+        doOnDismiss.run();
     }
 
     @SuppressLint("ClickableViewAccessibility")
