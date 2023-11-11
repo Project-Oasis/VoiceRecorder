@@ -2,12 +2,12 @@ package com.asynctaskcoffee.voicerecorder
 
 import android.Manifest
 import android.annotation.SuppressLint
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.asynctaskcoffee.audiorecorder.uikit.VoiceSenderDialog
 import com.asynctaskcoffee.audiorecorder.worker.AudioRecordListener

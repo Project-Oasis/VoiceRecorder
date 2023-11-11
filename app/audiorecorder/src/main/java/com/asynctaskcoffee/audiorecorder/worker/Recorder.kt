@@ -9,14 +9,13 @@ class Recorder(audioRecordListener: AudioRecordListener?, private var context: C
 
     private var recorder: MediaRecorder? = null
     private var audioRecordListener: AudioRecordListener? = null
-    private var fileName: String? = null
-    private var localPath = ""
+    private var filePath: String? = null
 
 
     private var isRecording = false
 
-    fun setFileName(fileName: String?) {
-        this.fileName = fileName
+    fun setFilePath(filePath: String?) {
+        this.filePath = filePath
     }
 
     fun setContext(context: Context) {
@@ -27,7 +26,6 @@ class Recorder(audioRecordListener: AudioRecordListener?, private var context: C
         if (context == null) {
             throw IllegalStateException("Context cannot be null")
         }
-        val destPath: String = context?.cacheDir?.absolutePath ?: ""
         recorder = MediaRecorder()
         recorder?.setAudioSource(MediaRecorder.AudioSource.DEFAULT)
         recorder?.setOutputFormat(AudioFormat.ENCODING_PCM_16BIT)
@@ -35,13 +33,18 @@ class Recorder(audioRecordListener: AudioRecordListener?, private var context: C
         recorder?.setAudioChannels(2)
         recorder?.setAudioSamplingRate(44100)
         recorder?.setAudioEncodingBitRate(128000)
-        localPath = destPath
-        localPath += if (fileName == null) {
-            "/Recorder_" + UUID.randomUUID().toString() + ".m4a"
-        } else {
-            fileName
+
+        //File path
+        if (filePath == null) { //If file path is not set
+            filePath = context?.cacheDir?.absolutePath ?: ""
+            filePath += "/Recorder_" + UUID.randomUUID().toString() + ".m4a"
+        } else {                //If file path is set
+            if (filePath?.endsWith(".m4a") == false) {
+                throw IllegalArgumentException("File extension must be .m4a")
+            }
         }
-        recorder?.setOutputFile(localPath)
+        recorder?.setOutputFile(filePath)
+
         try {
             recorder?.prepare()
         } catch (e: java.lang.Exception) {
@@ -68,7 +71,7 @@ class Recorder(audioRecordListener: AudioRecordListener?, private var context: C
             recorder?.stop()
             recorder?.release()
             recorder = null
-            reflectRecord(localPath)
+            reflectRecord(filePath)
         } catch (e: Exception) {
             e.printStackTrace()
             reflectError(e.toString())

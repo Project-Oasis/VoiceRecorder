@@ -37,7 +37,7 @@ import java.util.Objects;
 public class VoiceSenderDialog extends BottomSheetDialogFragment implements View.OnClickListener, View.OnTouchListener, AudioRecordListener, MediaPlayListener {
 
     private AudioRecordListener audioRecordListener;
-    private String fileName = null;
+    private String filePath = null;
 
     private boolean beepEnabled = false;
     private boolean permissionToRecordAccepted = false;
@@ -99,13 +99,14 @@ public class VoiceSenderDialog extends BottomSheetDialogFragment implements View
         audioSend.setImageDrawable(requireActivity().getDrawable(iconsObj.ic_send_circle));
     }
 
-    public void setFileName(String fileName) {
-        if (recorder != null) recorder.setFileName(fileName);
+    public void setFilePath(String fileURI) {
+        this.filePath = fileURI;
     }
 
     @SuppressLint("ClickableViewAccessibility")
     void setListeners() {
         recorder = new Recorder(this, requireContext());
+        recorder.setFilePath(filePath);
         player = new Player(this);
         closeRecordPanel.setOnClickListener(this);
         audioDelete.setOnClickListener(this);
@@ -115,7 +116,7 @@ public class VoiceSenderDialog extends BottomSheetDialogFragment implements View
 
     public void deleteCurrentFile() {
         try {
-            File file = new File(fileName);
+            File file = new File(filePath);
             file.delete();
             if (file.exists()) {
                 file.getCanonicalFile().delete();
@@ -140,8 +141,8 @@ public class VoiceSenderDialog extends BottomSheetDialogFragment implements View
                 recordDuration.stop();
             }
         } else if (audioSend.getId() == (v.getId())) {
-            if (audioSend.getVisibility() == View.VISIBLE && !TextUtils.isEmpty(fileName)) {
-                reflectRecord(fileName);
+            if (audioSend.getVisibility() == View.VISIBLE && !TextUtils.isEmpty(filePath)) {
+                reflectRecord(filePath);
                 dismiss();
             }
         } else if (closeRecordPanel.getId() == v.getId())
@@ -244,13 +245,13 @@ public class VoiceSenderDialog extends BottomSheetDialogFragment implements View
 
     @Override
     public void onAudioReady(String audioUri) {
-        fileName = audioUri;
-        player.injectMedia(fileName);
+        filePath = audioUri;
+        player.injectMedia(filePath);
     }
 
     @Override
     public void onRecordFailed(String errorMessage) {
-        fileName = null;
+        filePath = null;
         reflectError(errorMessage);
         dismiss();
     }

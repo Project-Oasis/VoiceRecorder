@@ -1,8 +1,6 @@
 package com.asynctaskcoffee.audiorecorder.uikit
 
-import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.media.AudioManager
 import android.media.ToneGenerator
@@ -17,7 +15,6 @@ import android.view.animation.ScaleAnimation
 import android.widget.Chronometer
 import android.widget.FrameLayout
 import android.widget.ImageView
-import androidx.core.app.ActivityCompat
 import com.asynctaskcoffee.audiorecorder.R
 import com.asynctaskcoffee.audiorecorder.worker.AudioRecordListener
 import com.asynctaskcoffee.audiorecorder.worker.Recorder
@@ -37,10 +34,6 @@ class RecordButton : FrameLayout, AudioRecordListener {
     constructor(context: Context) : super(context) {
         setupVisualComponents(context)
         this.mContext = context
-    }
-
-    fun setFileName(fileName: String?) {
-        if (recorder != null) recorder!!.setFileName(fileName)
     }
 
     var marginIn30Dp = TypedValue.applyDimension(
