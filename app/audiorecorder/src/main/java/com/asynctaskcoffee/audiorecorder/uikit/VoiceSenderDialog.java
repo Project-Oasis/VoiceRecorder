@@ -294,6 +294,7 @@ public class VoiceSenderDialog extends BottomSheetDialogFragment implements View
             recorder.reset();
             recorder = null;
             recorder = new Recorder(this, requireContext());
+            recorder.setFilePath(filePath);
         }
 
         if (player != null) {
