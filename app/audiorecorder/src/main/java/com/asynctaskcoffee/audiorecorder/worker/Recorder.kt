@@ -1,7 +1,6 @@
 package com.asynctaskcoffee.audiorecorder.worker
 
 import android.content.Context
-import android.media.AudioFormat
 import android.media.MediaRecorder
 import java.util.*
 
