@@ -5,13 +5,13 @@ public class LangObj {
     public LangObj() {
     }
 
-    String record_audio_string = "Start Record";
-    String hold_for_record_string = "Hold for record";
-    String release_for_end_string = "Release for end record";
-    String listen_record_string = "You can listen record";
-    String stop_listen_record_string = "Stop Listen";
-    String stop_record_string = "Stop Record";
-    String send_record_string = "Send Record";
+    String record_audio_string = "Start Recording";
+    String hold_for_record_string = "Hold to record";
+    String release_for_end_string = "Release to end recording";
+    String listen_record_string = "Play Recording";
+    String stop_listen_record_string = "Stop Playing";
+    String stop_record_string = "Stop Recording";
+    String send_record_string = "Send Recording";
 
     public LangObj(String record_audio_string, String hold_for_record_string, String release_for_end_string, String listen_record_string, String stop_listen_record_string, String stop_record_string, String send_record_string) {
         this.record_audio_string = record_audio_string;

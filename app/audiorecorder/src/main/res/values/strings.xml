@@ -3,7 +3,7 @@
     <string name="record_audio">Start Recording</string>
     <string name="hold_for_record">Hold to record</string>
     <string name="release_for_end">Release to end recording</string>
-    <string name="listen_record">Play recording</string>
+    <string name="listen_record">Play Recording</string>
     <string name="stop_listen_record">Stop Playing</string>
     <string name="stop_record">Stop Recording</string>
     <string name="send_record">Send Recording</string>
